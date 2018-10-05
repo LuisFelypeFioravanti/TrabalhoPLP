@@ -4,8 +4,7 @@ public class Item {
 	private String nome;
 	private int preco;
 	private int codigo;
-	private int qtdItens; 
-	
+	private TipoPrato tipo;
 	
 	
 	private void insere(String nome,int preco,int codigo) {
@@ -13,12 +12,6 @@ public class Item {
 		this.preco = preco;
 		this.codigo = codigo;
 		
-		qtdItens++;
-		
-	}
-	
-	public int calQtdItens() {
-		return qtdItens;
 	}
 	
 	private void altera(String novoNome, int novoPreco, int novoCodigo) {
