@@ -1,24 +1,37 @@
 package Main;
 
 import Modelos.Conta;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ListaContas {
-	public ArrayList<Conta> contas;
+	public Conta contas[];
 	private int tamanho =0;
 	
+	
+
+	public ListaContas(){
+		super();
+		this.contas = new Conta[20];
+		this.tamanho = 0;
+	}
 
 	public void insere(int mesa) {
-		System.out.println("entrei");
-		Conta pedido = new Conta(mesa);
-		pedido.insere();
-		tamanho++;
+		if(contas[mesa].mesa == -1) {
+			System.out.println("Digite o numero do pedido:");
+			Scanner scanner = new Scanner (System.in);
+			int nPedido = scanner.nextInt();
+		}
 		
+		
+		tamanho++;
 	}
 	
 	public void imprime() {
-		for(int i=0;i>tamanho;i++)
-			System.out.println(contas.get(i));
+		for(int i=0;i<tamanho;i++) {
+			
+			System.out.println(conta.mesa);
+			System.out.println(conta.getVetor());
+		}
 	}
 
 	public int getTamanho() {

@@ -11,8 +11,6 @@ public class Bebidas implements Menu {
 	@Override
 	public int getQtdItens() {
 		
-		qtdItens = drink.calQtdItens();
-		
 		return qtdItens;
 	}
 
