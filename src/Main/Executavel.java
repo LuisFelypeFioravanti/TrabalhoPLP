@@ -21,9 +21,9 @@ public class Executavel {
 	public static void main(String[] args) {
 		ListaContas listaConta = new ListaContas();
 		// aqui tem que carregar o HashMap de Contas do Arquivo pra essa ListaConta
-		int loop = 0;
+		int op = 0;
 		Scanner scanner = new Scanner(System.in);
-		while (loop != 9) {
+		while (op != 9) {
 			System.out.println("Bem Vindo ao Restaurante do Hudson!");
 			System.out.println("Digite a opcao desejada:");
 			System.out.println("1- Inserir um novo pedido");
@@ -33,7 +33,7 @@ public class Executavel {
 			System.out.println("9- Encerrar Programa");
 			
 
-			int op = scanner.nextInt();
+			op = scanner.nextInt();
 			
 			switch(op) {
 				case(1):
