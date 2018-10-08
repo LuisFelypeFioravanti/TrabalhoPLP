@@ -12,19 +12,17 @@ public class ListaContas {
 
 	public ListaContas() {
 		super();
-		System.out.println("Oii");
 		this.contas = new HashMap<Integer, Conta>();
 	}
 
 	public void insere(int nMesa) {
-		System.out.println("Digite o numero do pedido:");
+		System.out.println("Digite o numero do pedido: \n");
 		Scanner scanner = new Scanner(System.in);
 		int nPedido = scanner.nextInt(); // tenho umero da mesa
 		Conta atual = new Conta();
 
 		if (contas.getOrDefault(nMesa, atual).mesa == -1) {// mesa vazia
-			System.out.println("Conta zerada");
-
+			System.out.println("Foi criada uma nova conta para esta mesa. \n");
 			atual.insere(nPedido);
 			atual.mesa = nMesa;
 			contas.put(nMesa, atual);
@@ -40,11 +38,11 @@ public class ListaContas {
 		boolean vazia = mesas.isEmpty();
 		if(!vazia) {
 			for (Integer mesa : mesas) {//enhaced for
-				System.out.println(contas.get(mesa).mesa);
+				System.out.println("Número da Mesa:" + contas.get(mesa).mesa);
 				contas.get(mesa).imprime();
 			}
 		}
 		else
-			System.out.println("Nenhum pedido feito até o momento.");
+			System.out.println("Nenhum pedido feito até o momento. \n");
 	}
 }

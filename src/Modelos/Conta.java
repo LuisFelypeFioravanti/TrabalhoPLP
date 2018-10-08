@@ -10,7 +10,6 @@ public class Conta {
 	private int tamanho;
 
 	public Conta(){
-		System.out.println("Oi");
 		this.mesa= -1;	
 		this.valorTotal = 0;
 		vetor = new ArrayList<>();
@@ -27,7 +26,7 @@ public class Conta {
 	}
 	
 	public void imprime() {
-		System.out.println("Valor Total:"+ valorTotal+ "Pedidos:"+vetor);
+		System.out.println("Valor Total:"+ " " + valorTotal+"\n" + "Código dos Pedidos:"+vetor +"\n");
 	}
 	
 //	public void inserePedido(int qtdCodPratos,int codPrato) {

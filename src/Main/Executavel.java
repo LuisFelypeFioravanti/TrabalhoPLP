@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Executavel {
 
 	public static void insere(ListaContas listaConta) {
-		System.out.println("Digite o numero da mesa :");
+		System.out.println("Digite o numero da mesa : \n");
 		Scanner scanner = new Scanner(System.in);
 		int i = scanner.nextInt();
 		// carrega e mostra Lista de Pratos
 		listaConta.insere(i);
+		System.out.println("\n Pedido realizado com Sucesso");
 
 	}
 
 	public static void imprime(ListaContas listaConta) {
-		System.out.println("Imprime");
 		listaConta.imprime();
 	}
 
@@ -24,20 +24,20 @@ public class Executavel {
 		int op = 0;
 		Scanner scanner = new Scanner(System.in);
 		while (op != 9) {
-			System.out.println("Bem Vindo ao Restaurante do Hudson!");
+			System.out.println("\n Bem Vindo ao Restaurante do Hudson!");
 			System.out.println("Digite a opcao desejada:");
 			System.out.println("1- Inserir um novo pedido");
 			System.out.println("2- Listar as contas atuais:");
 			System.out.println("3- Fechar um conta existente");
 			System.out.println("4- Atualizar Menu");
-			System.out.println("9- Encerrar Programa");
+			System.out.println("9- Encerrar Programa \n");
 			
 
 			op = scanner.nextInt();
-			
+
 			switch(op) {
 				case(1):
-					System.out.println("Digite a quantidade de pedidos que deseja fazer:");
+					System.out.println("Digite a quantidade de pedidos que deseja fazer: \n");
 					int qtdPedidos = scanner.nextInt();
 					for (int i = 0; i < qtdPedidos; i++) {
 						insere(listaConta);
@@ -55,7 +55,7 @@ public class Executavel {
 			}
 		}
 		//aqui tem que gravar a lista no arquivo, pq o programa vai fechar.
-		System.out.println("Volte Sempre!");
+		System.out.println("Volte Sempre! \n");
 	}
 
 }
