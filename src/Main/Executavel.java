@@ -17,9 +17,14 @@ public class Executavel {
 	public static void imprime(ListaContas listaConta) {
 		listaConta.imprime();
 	}
+	
+	public static void fechaConta() {
+		
+	}
 
 	public static void main(String[] args) {
 		ListaContas listaConta = new ListaContas();
+		//tem que criar um HashMap pros itens também, e baixar o arquivo nessa lista
 		// aqui tem que carregar o HashMap de Contas do Arquivo pra essa ListaConta
 		int op = 0;
 		Scanner scanner = new Scanner(System.in);
