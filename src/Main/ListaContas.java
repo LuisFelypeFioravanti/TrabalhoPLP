@@ -1,41 +1,46 @@
 package Main;
 
 import Modelos.Conta;
+
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Map;
 
 public class ListaContas {
-	public Conta contas[];
-	private int tamanho =0;
+	public Map<Integer, Conta> contas;
 	
-	
-
 	public ListaContas(){
 		super();
-		this.contas = new Conta[20];
-		this.tamanho = 0;
+		System.out.println("Oii");
+		this.contas = new HashMap<Integer, Conta>();
 	}
 
-	public void insere(int mesa) {
-		if(contas[mesa].mesa == -1) {
-			System.out.println("Digite o numero do pedido:");
-			Scanner scanner = new Scanner (System.in);
-			int nPedido = scanner.nextInt();
+	public void insere(int nMesa) {
+		System.out.println("Digite o numero do pedido:");
+		Scanner scanner = new Scanner (System.in);
+		int nPedido = scanner.nextInt(); //tenho umero da mesa
+		Conta atual= new Conta();
+		
+		if(contas.getOrDefault(nMesa, atual).mesa == -1 ) {//mesa vazia
+			System.out.println("Conta zerada");
+			
+			atual.insere(nPedido);
+			atual.mesa= nMesa;
+			contas.put(nMesa,atual);
 		}
-		
-		
-		tamanho++;
+		else {
+			Conta nova = contas.get(nMesa);
+			nova.insere(nPedido);
+			contas.put(nMesa,nova);
+		}
 	}
 	
 	public void imprime() {
-		for(int i=0;i<tamanho;i++) {
-			
-			System.out.println(conta.mesa);
-			System.out.println(conta.getVetor());
+		Set<Integer> mesas = contas.keySet();
+		for (Integer mesa : mesas) {
+			System.out.println(contas.get(mesa).mesa);
+			contas.get(mesa).imprime();
 		}
 	}
-
-	public int getTamanho() {
-		return tamanho;
-	}
-	
 }

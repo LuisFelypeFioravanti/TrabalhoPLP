@@ -9,19 +9,25 @@ public class Conta {
 	private ArrayList<Integer> vetor;
 	private int tamanho;
 
-	public void Conta() {
+	public Conta(){
+		System.out.println("Oi");
 		this.mesa= -1;	
 		this.valorTotal = 0;
-		vetor= new ArrayList();
+		vetor = new ArrayList<>();
 		this.tamanho=0;
 	}
 	
-	public void insere() {
-		
+	public void insere(int nPedido) {
+		vetor.add(nPedido);
+		tamanho++;
 	}
 	
 	public int getTamanho() {
 		return tamanho;
+	}
+	
+	public void imprime() {
+		System.out.println("Valor Total:"+ valorTotal+ "Pedidos:"+vetor);
 	}
 	
 //	public void inserePedido(int qtdCodPratos,int codPrato) {
