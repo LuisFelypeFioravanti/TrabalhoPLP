@@ -8,17 +8,37 @@ public class Conta {
 	public int mesa;
 	private ArrayList<Integer> vetor;
 	private int tamanho;
+	public boolean aberta;
 
 	public Conta(){
 		this.mesa= -1;	
 		this.valorTotal = 0;
 		vetor = new ArrayList<>();
 		this.tamanho=0;
+		aberta=false;
 	}
 	
 	public void insere(int nPedido) {
+		aberta=true;
 		vetor.add(nPedido);
 		tamanho++;
+	}
+	
+	public int fechaConta() {
+		int tam =vetor.size();
+		valorTotal=0;
+		for (int i = 0; i < tam; i++) {
+			valorTotal+= vetor.get(i);
+		}
+		return valorTotal;		
+	}
+	
+	public void destroiConta() {
+		this.mesa= -1;	
+		this.valorTotal = 0;
+		vetor.clear();
+		this.tamanho=0;
+		aberta=false;
 	}
 	
 	public int getTamanho() {
@@ -26,30 +46,16 @@ public class Conta {
 	}
 	
 	public void imprime() {
-		System.out.println("Valor Total:"+ " " + valorTotal+"\n" + "Código dos Pedidos:"+vetor +"\n");
+		if(aberta) {
+			valorTotal=fechaConta();
+			System.out.println("Valor Total:"+ " " + valorTotal+"\n" + "Código dos Pedidos:"+vetor +"\n");
+		}
 	}
 	
-//	public void inserePedido(int qtdCodPratos,int codPrato) {
-//		.setPrato(codPrato,qtdCodPratos);
-//	}
-	
-	//public void insere
 
 	public ArrayList<Integer> getVetor() {
 		return vetor;
 	}
 
-	public int calcConta () {
-		int qtdPratos,codPratos,valor;
-//		
-//		codPratos = meuPedido.getCodPrato();
-//		qtdPratos = meuPedido.getQtdPrato();
-		
-		//valor = meuPrato.getValorPrato(codPratos);
-		
-		//valorTotal = valor * qtdPratos;
-		
-		return 0;
-	}
 
 }

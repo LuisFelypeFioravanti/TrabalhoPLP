@@ -18,8 +18,13 @@ public class Executavel {
 		listaConta.imprime();
 	}
 	
-	public static void fechaConta() {
-		
+	public static void fechaConta(ListaContas listaConta) {
+		System.out.println("Digite o numero da mesa que deseja fechar a conta: \n");
+		Scanner scanner = new Scanner(System.in);
+		int i = scanner.nextInt();
+		// carrega e mostra Lista de Pratos
+		listaConta.remove(i);
+		System.out.println("\n Conta encerrada com Sucesso \n");
 	}
 
 	public static void main(String[] args) {
@@ -52,7 +57,7 @@ public class Executavel {
 					imprime(listaConta);
 					break;
 				case(3):
-					//fechaConta(listaConta);
+					fechaConta(listaConta);
 					break;
 				case(4):
 					//atualizaMenu(listaConta);
