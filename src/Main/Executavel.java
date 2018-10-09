@@ -15,25 +15,30 @@ public class Executavel {
 		
 		// carrega e mostra Lista de Pratos
 		controlador.insere(nMesa,nPedido);
-		System.out.println("\n Pedido realizado com Sucesso");
-
 	}
 
-	public static void imprime(ListaContas listaConta) {
-		listaConta.imprime();
+	public static void imprime(){
+		controlador.imprime();
 	}
 	
-	public static void fechaConta(ListaContas listaConta) {
+	public static void fechaConta() {
 		System.out.println("Digite o numero da mesa que deseja fechar a conta: \n");
 		Scanner scanner = new Scanner(System.in);
 		int i = scanner.nextInt();
 		// carrega e mostra Lista de Pratos
-		listaConta.remove(i);
+		controlador.remove(i);
 		System.out.println("\n Conta encerrada com Sucesso \n");
 	}
 	
-	public static void atualizaMenu( ListaItem  cardapio) {
-		cardapio.atualizaMenuLista();
+	public static void atualizaMenu() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Digite o codigo do prato : \n");
+		int cod = scanner.nextInt();
+		System.out.println("Digite o nome do prato : \n");
+		String nome = scanner.next();
+		System.out.println("Digite o valor do prato : \n");
+		int valor = scanner.nextInt();
+		controlador.atualizaMenuLista(cod,nome,valor);
 	}
 
 	public static void main(String[] args) {
@@ -63,13 +68,13 @@ public class Executavel {
 					}
 					break;
 				case(2):
-					imprime(listaConta);
+					imprime();
 					break;
 				case(3):
-					fechaConta(listaConta);
+					fechaConta();
 					break;
 				case(4):
-					atualizaMenu(cardapio);
+					atualizaMenu();
 					break;
 			}
 		}

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class ControladorRestaurante {
 	public static Map<Integer, Conta> contas;
@@ -27,6 +28,7 @@ public class ControladorRestaurante {
 				existe.mesa = nMesa;
 			}
 			contas.put(nMesa, existe);
+			System.out.println("\n Pedido realizado com Sucesso");
 		} else {
 			System.out.println("O Item do pedido não existe no nosso Menu! \n");
 		}
@@ -45,7 +47,12 @@ public class ControladorRestaurante {
 			for (Integer numeroMesa : mesas) {// enhaced for
 				if (contas.get(numeroMesa).aberta) {
 					System.out.println("Número da Mesa:" + contas.get(numeroMesa).mesa);
-					contas.get(numeroMesa).imprime();
+					System.out.println("Valor Total: R$" + contas.get(numeroMesa).imprimeValorTotal());
+					ArrayList<Item> temp = contas.get(numeroMesa).getVetor();//lista temporaria
+					System.out.println("Itens Consumidos:");
+					for (Item item : temp) {
+						System.out.println("-" + item.getNome() + "\n");
+					}
 				}
 			}
 		} else
@@ -65,20 +72,9 @@ public class ControladorRestaurante {
 		}
 	}
 
-	public void atualizaMenuLista() {
+	public void atualizaMenuLista(int cod,String nome, int valor) {
 		Item itens = new Item();
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("Digite o codigo do prato : \n");
-		int cod = scanner.nextInt();
-		System.out.println("Digite o nome do prato : \n");
-		String nome = scanner.next();
-		System.out.println("Digite o valor do prato : \n");
-		int valor = scanner.nextInt();
-
-		// aqui vai o itens.altera, insere é só para teste
-		itens.insere(nome, valor, cod);
-
+		itens.insere(nome, valor, cod);// aqui vai o itens.altera, insere é só para teste
 		menu.put(cod, itens);
 	}
 
