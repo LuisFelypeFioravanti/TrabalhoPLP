@@ -3,13 +3,18 @@ package Main;
 import java.util.Scanner;
 
 public class Executavel {
+	
+	private static ControladorRestaurante controlador;
 
-	public static void insere(ListaContas listaConta) {
+	public static void insere() {
 		System.out.println("Digite o numero da mesa : \n");
 		Scanner scanner = new Scanner(System.in);
-		int i = scanner.nextInt();
+		int nMesa = scanner.nextInt();
+		System.out.println("Digite o numero do pedido: \n");
+		int nPedido = scanner.nextInt(); // tenho numero da mesa
+		
 		// carrega e mostra Lista de Pratos
-		listaConta.insere(i);
+		controlador.insere(nMesa,nPedido);
 		System.out.println("\n Pedido realizado com Sucesso");
 
 	}
@@ -26,9 +31,13 @@ public class Executavel {
 		listaConta.remove(i);
 		System.out.println("\n Conta encerrada com Sucesso \n");
 	}
+	
+	public static void atualizaMenu( ListaItem  cardapio) {
+		cardapio.atualizaMenuLista();
+	}
 
 	public static void main(String[] args) {
-		ListaContas listaConta = new ListaContas();
+		controlador = new ControladorRestaurante();
 		//tem que criar um HashMap pros itens também, e baixar o arquivo nessa lista
 		// aqui tem que carregar o HashMap de Contas do Arquivo pra essa ListaConta
 		int op = 0;
@@ -50,7 +59,7 @@ public class Executavel {
 					System.out.println("Digite a quantidade de pedidos que deseja fazer: \n");
 					int qtdPedidos = scanner.nextInt();
 					for (int i = 0; i < qtdPedidos; i++) {
-						insere(listaConta);
+						insere();
 					}
 					break;
 				case(2):
@@ -60,7 +69,7 @@ public class Executavel {
 					fechaConta(listaConta);
 					break;
 				case(4):
-					//atualizaMenu(listaConta);
+					atualizaMenu(cardapio);
 					break;
 			}
 		}

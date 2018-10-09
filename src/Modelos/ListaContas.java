@@ -1,6 +1,4 @@
-package Main;
-
-import Modelos.Conta;
+package Modelos;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -9,35 +7,40 @@ import java.util.Map;
 
 public class ListaContas {
 	public Map<Integer, Conta> contas;
+	
 
 	public ListaContas() {
 		super();
 		this.contas = new HashMap<Integer, Conta>();
 	}
 
-	public void insere(int nMesa) {
+	public void insere(int nMesa, ListaItem cardapio) {
 		System.out.println("Digite o numero do pedido: \n");
 		Scanner scanner = new Scanner(System.in);
-		int nPedido = scanner.nextInt(); // tenho umero da mesa
+		int nPedido = scanner.nextInt(); // tenho numero da mesa
 		Conta atual = new Conta();
 		Conta existe = contas.getOrDefault(nMesa, atual);
-
-		if (existe.mesa == -1) {// mesa vazia
-			System.out.println("Foi criada uma nova conta para esta mesa. \n");
-			existe.insere(nPedido);
-			existe.mesa = nMesa;
-			contas.put(nMesa, atual);
-		} 
-		else {
-			Conta nova = contas.get(nMesa);
-			nova.insere(nPedido);
-			contas.put(nMesa, nova);
+		existe.insere(nPedido,cardapio);
+		
+		if(existe.aberta) {
+			if (existe.mesa == -1) {// mesa vazia
+				System.out.println("Foi criada uma nova conta para esta mesa. \n");
+				existe.mesa = nMesa;
+			} 
+			contas.put(nMesa, existe);
 		}
+		else {
+			System.out.println("O Item do pedido não existe no nosso Menu! \n");
+		}
+
+
+		
 	}
 
 	public void imprime() {
 		Set<Integer> mesas = contas.keySet();
-		boolean vazia=true;
+		boolean vazia = true;
+		
 		for (Integer mesa : mesas) {
 			if(contas.get(mesa).aberta)
 				vazia=false;
@@ -68,4 +71,6 @@ public class ListaContas {
 			
 		}
 	}
+	
+	
 }
