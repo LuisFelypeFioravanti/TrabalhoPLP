@@ -5,13 +5,20 @@ import Modelos.Item;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.*;
+
 import java.util.Map;
+import java.awt.Menu;
 import java.util.ArrayList;
 
 public class ControladorRestaurante {
 	public static Map<Integer, Conta> contas;
 	public static Map<Integer, Item> menu;
-
 	public ControladorRestaurante() {
 		ControladorRestaurante.contas = new HashMap<Integer, Conta>();
 		ControladorRestaurante.menu = new HashMap<Integer, Item>();
@@ -76,6 +83,30 @@ public class ControladorRestaurante {
 		Item itens = new Item();
 		itens.insere(nome, valor, cod);// aqui vai o itens.altera, insere é só para teste
 		menu.put(cod, itens);
+		XStream gerador = new XStream(new DomDriver());
+		String xml = gerador.toXML(menu);
+		System.out.println(xml);
+		geraArquivo(xml);
+		
+		
+	}
+	
+	public void geraArquivo(String xml) {
+		PrintWriter print = null;
+		try {
+			File arqMenu = new File("/home/aluno/workspace");
+			print = new PrintWriter(arqMenu);
+			
+			print.write(xml);
+			print.flush();
+			print.close();
+		}
+		catch(FileNotFoundException ex) {
+			Logger.getLogger(ControladorRestaurante.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		finally {
+			print.close();
+		}
 	}
 
 }
