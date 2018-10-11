@@ -21,6 +21,10 @@ public class Executavel {
 		controlador.imprime();
 	}
 	
+	public static void finaliza() {
+		controlador.finaliza();
+	}
+	
 	public static void fechaConta() {
 		System.out.println("Digite o numero da mesa que deseja fechar a conta: \n");
 		Scanner scanner = new Scanner(System.in);
@@ -76,8 +80,10 @@ public class Executavel {
 				case(4):
 					atualizaMenu();
 					break;
+				
 			}
 		}
+		finaliza();
 		//aqui tem que gravar a lista no arquivo, pq o programa vai fechar.
 		System.out.println("Volte Sempre! \n");
 	}

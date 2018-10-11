@@ -83,6 +83,13 @@ public class ControladorRestaurante {
 		Item itens = new Item();
 		itens.insere(nome, valor, cod);// aqui vai o itens.altera, insere é só para teste
 		menu.put(cod, itens);
+	}
+	
+	public void finaliza() {
+		geraXML(menu);
+	}
+	
+	public void geraXML(Map<Integer, Item> menu) {
 		XStream gerador = new XStream(new DomDriver());
 		String xml = gerador.toXML(menu);
 		System.out.println(xml);
@@ -94,7 +101,7 @@ public class ControladorRestaurante {
 	public void geraArquivo(String xml) {
 		PrintWriter print = null;
 		try {
-			File arqMenu = new File("/home/aluno/workspace");
+			File arqMenu = new File("/home/aluno/workspace/menu.xml");
 			print = new PrintWriter(arqMenu);
 			
 			print.write(xml);
