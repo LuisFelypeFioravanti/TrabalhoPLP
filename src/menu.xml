@@ -1,0 +1,42 @@
+<map>
+  <entry>
+    <int>1</int>
+    <Modelos.Item>
+      <nome>Arroz</nome>
+      <preco>5</preco>
+      <codigo>1</codigo>
+    </Modelos.Item>
+  </entry>
+  <entry>
+    <int>2</int>
+    <Modelos.Item>
+      <nome>Feijao</nome>
+      <preco>10</preco>
+      <codigo>2</codigo>
+    </Modelos.Item>
+  </entry>
+  <entry>
+    <int>3</int>
+    <Modelos.Item>
+      <nome>Batata</nome>
+      <preco>10</preco>
+      <codigo>3</codigo>
+    </Modelos.Item>
+  </entry>
+  <entry>
+    <int>4</int>
+    <Modelos.Item>
+      <nome></nome>
+      <preco>30</preco>
+      <codigo>4</codigo>
+    </Modelos.Item>
+  </entry>
+  <entry>
+    <int>9</int>
+    <Modelos.Item>
+      <nome>chocolate belga</nome>
+      <preco>10</preco>
+      <codigo>9</codigo>
+    </Modelos.Item>
+  </entry>
+</map>

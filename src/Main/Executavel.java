@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Executavel {
 	
 	private static ControladorRestaurante controlador;
+	
+	
 
 	public static void insere() {
 		System.out.println("Digite o numero da mesa : \n");
@@ -12,8 +14,8 @@ public class Executavel {
 		int nMesa = scanner.nextInt();
 		System.out.println("Digite o numero do pedido: \n");
 		int nPedido = scanner.nextInt(); // tenho numero da mesa
+		 //carrega e mostra Lista de Pratos
 		
-		// carrega e mostra Lista de Pratos
 		controlador.insere(nMesa,nPedido);
 	}
 
@@ -36,10 +38,11 @@ public class Executavel {
 	
 	public static void atualizaMenu() {
 		Scanner scanner = new Scanner(System.in);
+		Scanner frase = new Scanner(System.in);
 		System.out.println("Digite o codigo do prato : \n");
 		int cod = scanner.nextInt();
 		System.out.println("Digite o nome do prato : \n");
-		String nome = scanner.next();
+		String nome = frase.nextLine();
 		System.out.println("Digite o valor do prato : \n");
 		int valor = scanner.nextInt();
 		controlador.atualizaMenuLista(cod,nome,valor);
@@ -47,6 +50,7 @@ public class Executavel {
 
 	public static void main(String[] args) {
 		controlador = new ControladorRestaurante();
+		controlador.inicia();
 		//tem que criar um HashMap pros itens também, e baixar o arquivo nessa lista
 		// aqui tem que carregar o HashMap de Contas do Arquivo pra essa ListaConta
 		int op = 0;

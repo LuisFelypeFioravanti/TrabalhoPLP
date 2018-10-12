@@ -13,7 +13,7 @@ public class Item {
 	
 	public Item() {
 		super();
-		this.nome = "";
+		this.nome ="" ;
 		this.preco = 0;
 		this.codigo = -1;
 		this.tipo = Nada;

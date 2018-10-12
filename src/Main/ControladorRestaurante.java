@@ -86,34 +86,68 @@ public class ControladorRestaurante {
 	}
 	
 	public void finaliza() {
-		geraXML(menu);
+		geraXML(menu,contas);
 	}
 	
-	public void geraXML(Map<Integer, Item> menu) {
+	public void inicia(){
+		buscaArquivo();
+		
+	}
+	
+	public void geraXML(Map<Integer, Item> menu,Map<Integer, Conta> contas) {
 		XStream gerador = new XStream(new DomDriver());
 		String xml = gerador.toXML(menu);
 		System.out.println(xml);
-		geraArquivo(xml);
 		
+		XStream geradorConta = new XStream(new DomDriver());
+		String xmlConta = geradorConta.toXML(contas);
+		System.out.println(xmlConta);
+		geraArquivo(xml,xmlConta);
 		
 	}
 	
-	public void geraArquivo(String xml) {
-		PrintWriter print = null;
+	public void buscaArquivo(){
 		try {
-			File arqMenu = new File("/home/aluno/workspace/menu.xml");
+			FileReader ler =  new FileReader("menu.xml");
+			XStream leitor = new XStream(new DomDriver());
+			FileReader ler2 =  new FileReader("contas.xml");
+			XStream leitor2 = new XStream(new DomDriver());
+			
+			menu = (Map<Integer, Item>)leitor.fromXML(ler);
+			contas = (Map<Integer, Conta>)leitor2.fromXML(ler2);
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		
+	}
+	
+	public void geraArquivo(String xml, String xmlConta) {
+		PrintWriter print = null;
+		PrintWriter print2 = null;
+		try {
+			File arqMenu = new File("menu.xml");
+			File arqConta = new File("contas.xml");
 			print = new PrintWriter(arqMenu);
+			print2 = new PrintWriter(arqConta);
 			
 			print.write(xml);
 			print.flush();
 			print.close();
+			print2.write(xmlConta);
+			print2.flush();
+			print2.close();
 		}
 		catch(FileNotFoundException ex) {
-			Logger.getLogger(ControladorRestaurante.class.getName()).log(Level.SEVERE, null, ex);
+			//Logger.getLogger(ControladorRestaurante.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		finally {
 			print.close();
 		}
 	}
+	
+
 
 }
