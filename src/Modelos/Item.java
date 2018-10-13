@@ -19,10 +19,11 @@ public class Item {
 		this.tipo = Nada;
 	}
 
-	public void insere(String nome,int preco,int codigo) {
+	public void insere(String nome,int preco,int codigo, TipoPrato tipo) {
 		this.nome = nome;
 		this.preco = preco;
 		this.codigo = codigo;
+		this.tipo = tipo;
 		
 	}
 
@@ -36,6 +37,11 @@ public class Item {
 
 	public String getNome() {
 		return nome;
+	}
+	
+	public TipoPrato getTipo() {
+		return tipo;
+		
 	}
 	
 	

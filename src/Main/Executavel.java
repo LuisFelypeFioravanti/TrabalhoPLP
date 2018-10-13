@@ -2,6 +2,8 @@ package Main;
 
 import java.util.Scanner;
 
+import Modelos.TipoPrato;
+
 public class Executavel {
 	
 	private static ControladorRestaurante controlador;
@@ -16,7 +18,7 @@ public class Executavel {
 		int nPedido = scanner.nextInt(); // tenho numero da mesa
 		 //carrega e mostra Lista de Pratos
 		
-		controlador.insere(nMesa,nPedido);
+		controlador.insere(nMesa,nPedido, TipoPrato.PD);
 	}
 
 	public static void imprime(){
@@ -45,14 +47,34 @@ public class Executavel {
 		String nome = frase.nextLine();
 		System.out.println("Digite o valor do prato : \n");
 		int valor = scanner.nextInt();
-		controlador.atualizaMenuLista(cod,nome,valor);
-	}
+		TipoPrato tipo = null;
+		System.out.println("Digite o tipo do prato : \n");
+		System.out.println("1 para COMIDA : \n");
+		System.out.println("2 para SOBREMESA : \n");
+		System.out.println("3 para BEBIDA : \n");
+		
+		int op = scanner.nextInt();
 
+		switch(op) {
+			case(1):
+				tipo = TipoPrato.P;
+				break;
+			case(2):
+				tipo = TipoPrato.S;
+				break;
+			case(3):
+				tipo = TipoPrato.B;
+				break;
+		}
+
+		
+		
+		controlador.atualizaMenuLista(cod,nome,valor,tipo);
+	}
+	
 	public static void main(String[] args) {
 		controlador = new ControladorRestaurante();
 		controlador.inicia();
-		//tem que criar um HashMap pros itens também, e baixar o arquivo nessa lista
-		// aqui tem que carregar o HashMap de Contas do Arquivo pra essa ListaConta
 		int op = 0;
 		Scanner scanner = new Scanner(System.in);
 		while (op != 9) {
@@ -62,6 +84,7 @@ public class Executavel {
 			System.out.println("2- Listar as contas atuais:");
 			System.out.println("3- Fechar um conta existente");
 			System.out.println("4- Atualizar Menu");
+			System.out.println("5- Menu");
 			System.out.println("9- Encerrar Programa \n");
 			
 
@@ -69,6 +92,7 @@ public class Executavel {
 
 			switch(op) {
 				case(1):
+					controlador.imprimeAux();
 					System.out.println("Digite a quantidade de pedidos que deseja fazer: \n");
 					int qtdPedidos = scanner.nextInt();
 					for (int i = 0; i < qtdPedidos; i++) {
@@ -84,11 +108,13 @@ public class Executavel {
 				case(4):
 					atualizaMenu();
 					break;
+				case(5):
+					controlador.imprimeAux();
+					break;
 				
 			}
 		}
 		finaliza();
-		//aqui tem que gravar a lista no arquivo, pq o programa vai fechar.
 		System.out.println("Volte Sempre! \n");
 	}
 

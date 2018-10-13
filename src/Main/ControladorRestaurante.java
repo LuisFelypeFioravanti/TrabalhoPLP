@@ -2,6 +2,8 @@ package Main;
 
 import Modelos.Conta;
 import Modelos.Item;
+import Modelos.TipoPrato;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -10,11 +12,14 @@ import java.util.logging.Logger;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.AnyTypePermission;
+
 import java.io.*;
 
 import java.util.Map;
 import java.awt.Menu;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ControladorRestaurante {
 	public static Map<Integer, Conta> contas;
@@ -24,7 +29,7 @@ public class ControladorRestaurante {
 		ControladorRestaurante.menu = new HashMap<Integer, Item>();
 	}
 
-	public static void insere(int nMesa, int nPedido) {
+	public static void insere(int nMesa, int nPedido, TipoPrato tipo) {
 		Conta atual = new Conta();
 		Conta existe = contas.getOrDefault(nMesa, atual);
 		existe.insere(nPedido, menu);
@@ -79,10 +84,117 @@ public class ControladorRestaurante {
 		}
 	}
 
-	public void atualizaMenuLista(int cod,String nome, int valor) {
+	public void atualizaMenuLista(int cod,String nome, int valor, TipoPrato tipo) {
 		Item itens = new Item();
-		itens.insere(nome, valor, cod);// aqui vai o itens.altera, insere é só para teste
+		itens.insere(nome, valor, cod, tipo);// aqui vai o itens.altera, insere é só para teste
 		menu.put(cod, itens);
+	}
+	
+	public void imprimeAux(){
+		imprimeMenu(menu);
+	}
+	public void imprimeMenu(Map<Integer, Item> menu){
+		 System.out.println("PRATOS PRINCIPAIS \n");
+		 for (Integer chave : menu.keySet()) {
+			 TipoPrato tipo = menu.get(chave).getTipo();
+			 if(tipo == TipoPrato.P) {
+	             String nome = menu.get(chave).getNome();
+	             Integer codigo = menu.get(chave).getCodigo();
+	             Integer valor = menu.get(chave).getPreco();
+	             int tamanho = nome.length();
+	             if(chave < 10) {
+	            	 int cont = 0;
+	            	 System.out.print(" "+ codigo + " " );
+	            	 System.out.print(nome + "                              ");
+	            	 while(cont < 30-tamanho){
+	            		 System.out.print(" ");
+	            		 cont++;
+	            	 }
+	            	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+	             else {
+	                	 int cont = 0;
+	                	 System.out.print(codigo + " " );
+	                	 System.out.print(nome + "                              ");
+	                	 while(cont < 30-tamanho){
+	                		 System.out.print(" ");
+	                		 cont++;
+	                	 }
+	                	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+		
+			 }
+		 }
+		 System.out.println("\n");
+		 System.out.println("SOBREMESAS \n");
+		 for (Integer chave : menu.keySet()) {
+			 TipoPrato tipo = menu.get(chave).getTipo();
+			 if(tipo == TipoPrato.S) {
+	             String nome = menu.get(chave).getNome();
+	             Integer codigo = menu.get(chave).getCodigo();
+	             Integer valor = menu.get(chave).getPreco();
+	             int tamanho = nome.length();
+	             if(chave < 10) {
+	            	 int cont = 0;
+	            	 System.out.print(" "+ codigo + " " );
+	            	 System.out.print(nome + "                              ");
+	            	 while(cont < 30-tamanho){
+	            		 System.out.print(" ");
+	            		 cont++;
+	            	 }
+	            	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+	             else {
+	                	 int cont = 0;
+	                	 System.out.print(codigo + " " );
+	                	 System.out.print(nome + "                              ");
+	                	 while(cont < 30-tamanho){
+	                		 System.out.print(" ");
+	                		 cont++;
+	                	 }
+	                	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+		
+			 }
+		 }
+		 System.out.println("\n");
+		 System.out.println("BEBIDAS \n");
+		 for (Integer chave : menu.keySet()) {
+			 TipoPrato tipo = menu.get(chave).getTipo();
+			 if(tipo == TipoPrato.B) {
+	             String nome = menu.get(chave).getNome();
+	             Integer codigo = menu.get(chave).getCodigo();
+	             Integer valor = menu.get(chave).getPreco();
+	             int tamanho = nome.length();
+	             if(chave < 10) {
+	            	 int cont = 0;
+	            	 System.out.print(" "+ codigo + " " );
+	            	 System.out.print(nome + "                              ");
+	            	 while(cont < 30-tamanho){
+	            		 System.out.print(" ");
+	            		 cont++;
+	            	 }
+	            	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+	             else {
+	                	 int cont = 0;
+	                	 System.out.print(codigo + " " );
+	                	 System.out.print(nome + "                              ");
+	                	 while(cont < 30-tamanho){
+	                		 System.out.print(" ");
+	                		 cont++;
+	                	 }
+	                	 System.out.println("R$ " + valor + ".00");
+	            	 
+	             }
+		
+			 }
+		 }
 	}
 	
 	public void finaliza() {
@@ -94,14 +206,14 @@ public class ControladorRestaurante {
 		
 	}
 	
+	
 	public void geraXML(Map<Integer, Item> menu,Map<Integer, Conta> contas) {
 		XStream gerador = new XStream(new DomDriver());
+		XStream.setupDefaultSecurity(gerador);
+		gerador.addPermission(AnyTypePermission.ANY);
 		String xml = gerador.toXML(menu);
-		System.out.println(xml);
-		
 		XStream geradorConta = new XStream(new DomDriver());
 		String xmlConta = geradorConta.toXML(contas);
-		System.out.println(xmlConta);
 		geraArquivo(xml,xmlConta);
 		
 	}
@@ -113,12 +225,16 @@ public class ControladorRestaurante {
 			FileReader ler2 =  new FileReader("contas.xml");
 			XStream leitor2 = new XStream(new DomDriver());
 			
+			XStream.setupDefaultSecurity(leitor);
+			leitor.addPermission(AnyTypePermission.ANY);
+			XStream.setupDefaultSecurity(leitor2);
+			leitor2.addPermission(AnyTypePermission.ANY);
 			menu = (Map<Integer, Item>)leitor.fromXML(ler);
 			contas = (Map<Integer, Conta>)leitor2.fromXML(ler2);
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blok
 			//e.printStackTrace();
 		}
 		
